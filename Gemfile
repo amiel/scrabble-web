@@ -10,6 +10,7 @@ end
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
+  gem 'guard-shell'
   gem 'guard-rspec'
   gem 'capybara'
   gem 'launchy'
