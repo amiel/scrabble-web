@@ -6,7 +6,13 @@ class WordsController < ApplicationController
   end
 
   def create
-    Word.create params[:word]
+    @word = Word.new params[:word]
+    if @word.save
+      # Good on you
+    else
+      flash[:notice] = "Sorry, please enter at least one word made up of only letters"
+    end
+
     redirect_to words_path
   end
 end
