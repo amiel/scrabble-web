@@ -7,10 +7,10 @@ class LettersValidator < ActiveModel::EachValidator
   private
 
   def is_all_letters?(string)
-    split(string).all? { |c| is_letter?(c) }
+    characters(string).all? { |c| is_letter?(c) }
   end
 
-  def split(string)
+  def characters(string)
     string.to_s.split(//)
   end
 

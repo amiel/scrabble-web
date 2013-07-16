@@ -10,4 +10,14 @@ class Word < ActiveRecord::Base
       "U"=>1, "V"=>4, "W"=>4, "X"=>8, "Y"=>4, "Z"=>10,
     }
   end
+
+  def compute_score
+    characters.sum { |c| letter_scores[c.upcase] }
+  end
+
+  private
+
+  def characters
+    word.to_s.split(//)
+  end
 end
