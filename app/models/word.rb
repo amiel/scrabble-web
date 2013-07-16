@@ -3,6 +3,9 @@ class Word < ActiveRecord::Base
   attr_accessible :word
   validates :word, presence: true, letters: true
 
+  before_save :downcase_word
+  before_save :compute_score
+
   def letter_scores
     {
       "A"=>1, "B"=>3, "C"=>3, "D"=>2, "E"=>1, "F"=>4, "G"=>2, "H"=>4, "I"=>1, "J"=>8,
@@ -12,10 +15,14 @@ class Word < ActiveRecord::Base
   end
 
   def compute_score
-    characters.sum { |c| letter_scores[c.upcase] }
+    self.score = characters.sum { |c| letter_scores[c.upcase] }
   end
 
   private
+
+  def downcase_word
+    self.word = self.word.downcase
+  end
 
   def characters
     word.to_s.split(//)
