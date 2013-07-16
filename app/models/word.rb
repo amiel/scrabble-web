@@ -1,8 +1,7 @@
 class Word < ActiveRecord::Base
 
   attr_accessible :word
-
-  validates_presence_of :word
+  validates :word, presence: true, letters: true
 
   def letter_scores
     {
